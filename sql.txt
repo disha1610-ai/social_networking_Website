@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS profiles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    text TEXT
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    auth VARCHAR(50) NOT NULL,     -- sender
+    recip VARCHAR(50) NOT NULL,    -- receiver
+    pm CHAR(1) NOT NULL,           -- '0' public, '1' private
+    time INT NOT NULL,
+    message TEXT NOT NULL
+);
+
+CREATE TABLE friends (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(32) NOT NULL,
+    friend VARCHAR(32) NOT NULL
+);
+
+GRANT ALL PRIVILEGES ON robinsnest.* TO 'robinsnest'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
